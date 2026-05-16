@@ -322,12 +322,12 @@ private fun QuickActions(nav: NavHostController) {
         modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        QuickActionCard(Icons.Default.LiveTv, "Live TV", { nav.navigate(Routes.LiveTv) }, Modifier.weight(1f))
-        QuickActionCard(Icons.Default.Movie, "Movies", { nav.navigate(Routes.Movies) }, Modifier.weight(1f))
-        QuickActionCard(Icons.Default.Tv, "Series", { nav.navigate(Routes.Series) }, Modifier.weight(1f))
-        QuickActionCard(Icons.Default.CalendarMonth, "Guide", { nav.navigate(Routes.Epg) }, Modifier.weight(1f))
-        QuickActionCard(Icons.Default.Favorite, "Favorites", { nav.navigate(Routes.Favorites) }, Modifier.weight(1f))
-        QuickActionCard(Icons.Default.Settings, "Settings", { nav.navigate(Routes.Settings) }, Modifier.weight(1f))
+        QuickActionCard(Icons.Default.LiveTv, "Live TV", modifier = Modifier.weight(1f)) { nav.navigate(Routes.LiveTv) }
+        QuickActionCard(Icons.Default.Movie, "Movies", modifier = Modifier.weight(1f)) { nav.navigate(Routes.Movies) }
+        QuickActionCard(Icons.Default.Tv, "Series", modifier = Modifier.weight(1f)) { nav.navigate(Routes.Series) }
+        QuickActionCard(Icons.Default.CalendarMonth, "Guide", modifier = Modifier.weight(1f)) { nav.navigate(Routes.Epg) }
+        QuickActionCard(Icons.Default.Favorite, "Favorites", modifier = Modifier.weight(1f)) { nav.navigate(Routes.Favorites) }
+        QuickActionCard(Icons.Default.Settings, "Settings", modifier = Modifier.weight(1f)) { nav.navigate(Routes.Settings) }
     }
 }
 

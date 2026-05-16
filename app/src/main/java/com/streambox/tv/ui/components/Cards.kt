@@ -154,8 +154,8 @@ fun PosterCard(
     title: String,
     subtitle: String,
     imageUrl: String?,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     val src = remember { MutableInteractionSource() }
     val focused by src.collectIsFocusedAsState()
@@ -196,8 +196,8 @@ fun PosterCard(
 fun QuickActionCard(
     icon: ImageVector,
     title: String,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit,
 ) {
     val src = remember { MutableInteractionSource() }
     val focused by src.collectIsFocusedAsState()
