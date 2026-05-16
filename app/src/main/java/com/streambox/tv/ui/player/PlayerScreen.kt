@@ -1,10 +1,14 @@
 package com.streambox.tv.ui.player
 
 import android.app.Activity
+import android.app.PictureInPictureParams
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.media.AudioManager
+import android.os.Build
+import android.util.Rational
 import android.view.WindowManager
+import androidx.compose.material3.AlertDialog
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -98,6 +102,8 @@ private enum class ConnectionPhase { Buffering, Playing, Error }
 
 private enum class GestureKind { None, Brightness, Volume, Seek }
 
+private enum class TrackPickerKind { Audio, Subtitle }
+
 private val ASPECT_OPTIONS = listOf(
     "Fit" to AspectRatioFrameLayout.RESIZE_MODE_FIT,
     "Fill" to AspectRatioFrameLayout.RESIZE_MODE_FILL,
@@ -178,6 +184,8 @@ fun PlayerScreen(nav: NavHostController, streamUrl: String, vm: PlayerViewModel 
     var overlayVisible by remember { mutableStateOf(true) }
     var drawerOpen by remember { mutableStateOf(false) }
     var aspectMode by remember { mutableStateOf(AspectRatioFrameLayout.RESIZE_MODE_FIT) }
+    var trackPicker by remember { mutableStateOf<TrackPickerKind?>(null) }
+    var infoOpen by remember { mutableStateOf(false) }
 
     var brightness by remember { mutableFloatStateOf(activity?.window?.attributes?.screenBrightness?.takeIf { it >= 0 } ?: 0.5f) }
     val audio = remember { ctx.getSystemService(Context.AUDIO_SERVICE) as AudioManager }
@@ -340,7 +348,26 @@ fun PlayerScreen(nav: NavHostController, streamUrl: String, vm: PlayerViewModel 
             visible = overlayVisible,
             enter = fadeIn(tween(180)),
             exit = fadeOut(tween(180)),
-        ) { TopOverlay(channel = state.currentChannel, onClose = { nav.popBackStack() }) }
+        ) {
+            TopOverlay(
+                channel = state.currentChannel,
+                onInfo = { infoOpen = true },
+                onPip = {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && activity != null) {
+                        runCatching {
+                            activity.enterPictureInPictureMode(
+                                PictureInPictureParams.Builder()
+                                    .setAspectRatio(Rational(16, 9))
+                                    .build()
+                            )
+                        }
+                    } else {
+                        showHud(Icons.Default.Info, "Picture-in-picture needs Android 8+", 1f)
+                    }
+                },
+                onClose = { nav.popBackStack() },
+            )
+        }
 
         // ---- Bottom overlay ----
         AnimatedVisibility(
@@ -356,6 +383,8 @@ fun PlayerScreen(nav: NavHostController, streamUrl: String, vm: PlayerViewModel 
                 onPlayPause = { if (isPlaying) exo.pause() else exo.play() },
                 onSeekTo = { ms -> exo.seekTo(ms) },
                 onToggleDrawer = { drawerOpen = !drawerOpen },
+                onAudio = { trackPicker = TrackPickerKind.Audio },
+                onSubtitles = { trackPicker = TrackPickerKind.Subtitle },
                 onCycleAspect = {
                     val next = ASPECT_OPTIONS[(ASPECT_OPTIONS.indexOfFirst { it.second == aspectMode } + 1) % ASPECT_OPTIONS.size]
                     aspectMode = next.second
@@ -381,6 +410,25 @@ fun PlayerScreen(nav: NavHostController, streamUrl: String, vm: PlayerViewModel 
                     }
                 },
                 onClose = { drawerOpen = false },
+            )
+        }
+
+        // ---- Track picker dialog (audio / subtitles) ----
+        if (trackPicker != null) {
+            TrackPickerDialog(
+                kind = trackPicker!!,
+                player = exo,
+                onDismiss = { trackPicker = null },
+            )
+        }
+
+        // ---- Quick info dialog ----
+        if (infoOpen) {
+            StreamInfoDialog(
+                channel = state.currentChannel,
+                streamUrl = streamUrl,
+                aspectLabel = ASPECT_OPTIONS.firstOrNull { it.second == aspectMode }?.first ?: "Fit",
+                onDismiss = { infoOpen = false },
             )
         }
     }
@@ -453,7 +501,7 @@ private fun CenterStatus(text: String, color: Color) {
 }
 
 @Composable
-private fun TopOverlay(channel: Channel?, onClose: () -> Unit) {
+private fun TopOverlay(channel: Channel?, onInfo: () -> Unit, onPip: () -> Unit, onClose: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -471,8 +519,8 @@ private fun TopOverlay(channel: Channel?, onClose: () -> Unit) {
             Text(channel?.name ?: "Stream", color = TextPrimary, style = MaterialTheme.typography.titleLarge)
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OverlayChip(Icons.Default.Info, "Info") {}
-            OverlayChip(Icons.Default.PictureInPicture, "PiP") {}
+            OverlayChip(Icons.Default.Info, "Info", onInfo)
+            OverlayChip(Icons.Default.PictureInPicture, "PiP", onPip)
             OverlayChip(Icons.Default.Close, "Close", onClose)
         }
     }
@@ -486,6 +534,8 @@ private fun BottomOverlay(
     onPlayPause: () -> Unit,
     onSeekTo: (Long) -> Unit,
     onToggleDrawer: () -> Unit,
+    onAudio: () -> Unit,
+    onSubtitles: () -> Unit,
     onCycleAspect: () -> Unit,
 ) {
     Column(
@@ -529,12 +579,12 @@ private fun BottomOverlay(
         Spacer(Modifier.height(12.dp))
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OverlayChip(if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow, if (isPlaying) "Pause" else "Play", onPlayPause)
-            OverlayChip(Icons.Default.AudioFile, "Audio") {}
-            OverlayChip(Icons.Default.Subtitles, "Subtitles") {}
+            OverlayChip(Icons.Default.AudioFile, "Audio", onAudio)
+            OverlayChip(Icons.Default.Subtitles, "Subtitles", onSubtitles)
             OverlayChip(Icons.Default.AspectRatio, "Aspect", onCycleAspect)
             Spacer(Modifier.weight(1f))
             OverlayChip(Icons.Default.Info, "Channels", onToggleDrawer)
-            OverlayChip(Icons.Default.Fullscreen, "Fullscreen") {}
+            OverlayChip(Icons.Default.Fullscreen, "Cycle aspect", onCycleAspect)
         }
     }
 }
@@ -609,5 +659,168 @@ private fun ChannelDrawer(
                 }
             }
         }
+    }
+}
+
+
+
+// ---------- Track picker (audio / subtitles) ----------
+
+@Composable
+private fun TrackPickerDialog(
+    kind: TrackPickerKind,
+    player: ExoPlayer,
+    onDismiss: () -> Unit,
+) {
+    val tracks = player.currentTracks
+    val trackType = if (kind == TrackPickerKind.Audio)
+        androidx.media3.common.C.TRACK_TYPE_AUDIO
+    else
+        androidx.media3.common.C.TRACK_TYPE_TEXT
+
+    val groups = tracks.groups.filter { it.type == trackType }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        containerColor = Bg800,
+        title = {
+            Text(
+                if (kind == TrackPickerKind.Audio) "Audio track" else "Subtitle track",
+                color = TextPrimary,
+            )
+        },
+        text = {
+            if (groups.isEmpty()) {
+                Text(
+                    if (kind == TrackPickerKind.Audio)
+                        "No audio tracks reported by this stream."
+                    else
+                        "No subtitle tracks reported by this stream.",
+                    color = TextSecondary,
+                )
+            } else {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    if (kind == TrackPickerKind.Subtitle) {
+                        item("off") {
+                            TrackRow(
+                                label = "Off",
+                                selected = groups.none { g -> (0 until g.length).any { i -> g.isTrackSelected(i) } },
+                                onClick = {
+                                    player.trackSelectionParameters = player.trackSelectionParameters
+                                        .buildUpon()
+                                        .setTrackTypeDisabled(trackType, true)
+                                        .build()
+                                    onDismiss()
+                                },
+                            )
+                        }
+                    }
+                    items(groups) { group ->
+                        for (i in 0 until group.length) {
+                            val format = group.getTrackFormat(i)
+                            val label = listOfNotNull(
+                                format.label,
+                                format.language,
+                                format.codecs,
+                            ).joinToString(" · ").ifBlank { "Track ${i + 1}" }
+                            TrackRow(
+                                label = label,
+                                selected = group.isTrackSelected(i),
+                                onClick = {
+                                    val override = androidx.media3.common.TrackSelectionOverride(
+                                        group.mediaTrackGroup, i,
+                                    )
+                                    player.trackSelectionParameters = player.trackSelectionParameters
+                                        .buildUpon()
+                                        .setTrackTypeDisabled(trackType, false)
+                                        .setOverrideForType(override)
+                                        .build()
+                                    onDismiss()
+                                },
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            androidx.compose.material3.TextButton(onClick = onDismiss) {
+                Text("Close", color = Teal400)
+            }
+        },
+    )
+}
+
+@Composable
+private fun TrackRow(label: String, selected: Boolean, onClick: () -> Unit) {
+    val src = remember { MutableInteractionSource() }
+    val focused by src.collectIsFocusedAsState()
+    val shape = RoundedCornerShape(10.dp)
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(44.dp)
+            .background(
+                when {
+                    selected -> TealGlow
+                    focused -> Color.White.copy(alpha = 0.05f)
+                    else -> Color.Transparent
+                },
+                shape,
+            )
+            .border(1.dp, if (focused) FocusRing else if (selected) Teal400 else Color.Transparent, shape)
+            .clickable(interactionSource = src, indication = null, onClick = onClick)
+            .padding(horizontal = 12.dp),
+    ) {
+        Box(
+            modifier = Modifier
+                .size(8.dp)
+                .background(if (selected) Teal400 else TextMuted.copy(alpha = 0.5f), RoundedCornerShape(4.dp)),
+        )
+        Spacer(Modifier.width(12.dp))
+        Text(label, color = if (selected) Teal400 else TextPrimary, style = MaterialTheme.typography.titleSmall)
+    }
+}
+
+// ---------- Stream info dialog ----------
+
+@Composable
+private fun StreamInfoDialog(
+    channel: Channel?,
+    streamUrl: String,
+    aspectLabel: String,
+    onDismiss: () -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        containerColor = Bg800,
+        title = { Text("Stream info", color = TextPrimary) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                InfoRow("Channel", channel?.name ?: "—")
+                InfoRow("Group", channel?.group ?: "—")
+                InfoRow("Quality", channel?.quality ?: "—")
+                InfoRow("Aspect", aspectLabel)
+                InfoRow("Source", streamUrl, mono = true)
+            }
+        },
+        confirmButton = {
+            androidx.compose.material3.TextButton(onClick = onDismiss) {
+                Text("Close", color = Teal400)
+            }
+        },
+    )
+}
+
+@Composable
+private fun InfoRow(label: String, value: String, mono: Boolean = false) {
+    Column {
+        Text(label.uppercase(), color = TextMuted, style = MaterialTheme.typography.labelSmall)
+        Text(
+            value,
+            color = TextPrimary,
+            style = if (mono) MaterialTheme.typography.bodySmall else MaterialTheme.typography.bodyMedium,
+        )
     }
 }

@@ -368,7 +368,7 @@ private fun HeroSection(
                 Spacer(Modifier.width(12.dp))
                 SecondaryButton(text = "Open Guide", leadingIcon = Icons.Default.CalendarMonth, onClick = onGuide)
                 Spacer(Modifier.width(12.dp))
-                GhostButton(text = "Channel info", onClick = {})
+                GhostButton(text = "Channel info", onClick = onGuide)
             }
         }
     }

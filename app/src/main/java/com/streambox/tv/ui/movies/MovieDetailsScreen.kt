@@ -55,6 +55,7 @@ import com.streambox.tv.ui.theme.TextSecondary
 fun MovieDetailsScreen(nav: NavHostController, id: String, vm: MoviesViewModel = hiltViewModel()) {
     val movie = vm.get(id) ?: return
     val related = vm.related(id)
+    var infoOpen by remember { androidx.compose.runtime.mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxSize().background(Bg900).verticalScroll(rememberScrollState()),
@@ -101,7 +102,7 @@ fun MovieDetailsScreen(nav: NavHostController, id: String, vm: MoviesViewModel =
                             onClick = { vm.toggleFavorite(id) },
                         )
                         Spacer(Modifier.width(12.dp))
-                        GhostButton("Stream info", onClick = {})
+                        GhostButton("Stream info", onClick = { infoOpen = true })
                     }
                 }
             }
@@ -124,5 +125,43 @@ fun MovieDetailsScreen(nav: NavHostController, id: String, vm: MoviesViewModel =
             }
         }
         Spacer(Modifier.height(40.dp))
+    }
+
+    if (infoOpen) {
+        androidx.compose.material3.AlertDialog(
+            onDismissRequest = { infoOpen = false },
+            containerColor = com.streambox.tv.ui.theme.Bg800,
+            title = { Text("Stream info", color = com.streambox.tv.ui.theme.TextPrimary) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    InfoLine("Title", movie.title)
+                    InfoLine("Year · Genre", "${movie.year} · ${movie.genre}")
+                    InfoLine("Duration", "${movie.durationMin} min")
+                    InfoLine("Rating", "★ ${movie.rating}")
+                    InfoLine("Source", movie.streamUrl, mono = true)
+                }
+            },
+            confirmButton = {
+                androidx.compose.material3.TextButton(onClick = { infoOpen = false }) {
+                    Text("Close", color = com.streambox.tv.ui.theme.Teal400)
+                }
+            },
+        )
+    }
+}
+
+@Composable
+private fun InfoLine(label: String, value: String, mono: Boolean = false) {
+    Column {
+        Text(
+            label.uppercase(),
+            color = com.streambox.tv.ui.theme.TextMuted,
+            style = MaterialTheme.typography.labelSmall,
+        )
+        Text(
+            value,
+            color = com.streambox.tv.ui.theme.TextPrimary,
+            style = if (mono) MaterialTheme.typography.bodySmall else MaterialTheme.typography.bodyMedium,
+        )
     }
 }
