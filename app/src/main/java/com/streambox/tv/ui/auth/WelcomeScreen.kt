@@ -58,7 +58,7 @@ fun WelcomeScreen(onAddPlaylist: () -> Unit, onSkip: () -> Unit) {
                 modifier = Modifier.size(64.dp).background(Brush.linearGradient(listOf(Teal500, Teal400)), RoundedCornerShape(20.dp)),
             )
             Spacer(Modifier.height(28.dp))
-            Text("Welcome to StreamBox", style = MaterialTheme.typography.displaySmall, color = TextPrimary)
+            Text("Welcome to AuraTV", style = MaterialTheme.typography.displaySmall, color = TextPrimary)
             Spacer(Modifier.height(12.dp))
             Text(
                 "Bring your own IPTV. Connect a playlist or a Stalker portal and we’ll handle the rest — channels, EPG, movies, series, favorites and a player tuned for both phone and TV.",

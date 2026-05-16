@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--
+      Many IPTV providers serve plain HTTP (no TLS) on non-standard ports.
+      We permit cleartext globally so that AuraTV can talk to those servers.
+    -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

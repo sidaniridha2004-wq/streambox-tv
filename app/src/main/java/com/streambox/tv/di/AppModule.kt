@@ -1,16 +1,14 @@
 package com.streambox.tv.di
 
-import com.streambox.tv.data.IptvRepository
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
+/**
+ * All dependencies in this module are constructor-injected via @Inject, so
+ * this module is currently empty. Kept as a single place to add bindings if
+ * we later need to swap implementations (e.g. fake repository in tests).
+ */
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-    @Provides
-    @Singleton
-    fun provideIptvRepository(): IptvRepository = IptvRepository()
-}
+object AppModule

@@ -36,7 +36,7 @@ fun isAndroidTv(context: Context): Boolean {
 }
 
 @Composable
-fun StreamBoxTheme(content: @Composable () -> Unit) {
+fun AuraTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = DarkColors,
         typography = AppTypography,

@@ -78,7 +78,7 @@ fun SettingsScreen(nav: NavHostController) {
         }
 
         SettingsGroup("About") {
-            SettingsRow(Icons.Default.Info, "About StreamBox TV", "v1.0.0 · build 1", onClick = {})
+            SettingsRow(Icons.Default.Info, "About AuraTV", "v1.0.0 · build 1", onClick = {})
         }
     }
 }

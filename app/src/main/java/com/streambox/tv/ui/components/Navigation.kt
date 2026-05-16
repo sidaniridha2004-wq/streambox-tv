@@ -1,5 +1,8 @@
 package com.streambox.tv.ui.components
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -14,6 +17,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,11 +27,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.streambox.tv.ui.theme.Bg800
 import com.streambox.tv.ui.theme.Bg900
@@ -95,10 +102,15 @@ fun TvNavRail(
     modifier: Modifier = Modifier,
     expanded: Boolean = true,
 ) {
+    val animatedWidth by animateDpAsState(
+        targetValue = if (expanded) 220.dp else 84.dp,
+        animationSpec = spring(dampingRatio = Spring.DampingRatioNoBouncy, stiffness = Spring.StiffnessMedium),
+        label = "rail-width",
+    )
     Column(
         modifier = modifier
             .fillMaxHeight()
-            .width(if (expanded) 220.dp else 84.dp)
+            .width(animatedWidth)
             .background(Bg900)
             .padding(vertical = 24.dp, horizontal = 12.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
@@ -125,8 +137,8 @@ private fun BrandMark(expanded: Boolean) {
         if (expanded) {
             Spacer(Modifier.width(10.dp))
             Column {
-                Text("StreamBox", color = TextPrimary, style = MaterialTheme.typography.titleMedium)
-                Text("TV · IPTV", color = TextMuted, style = MaterialTheme.typography.labelSmall)
+                Text("AuraTV", color = TextPrimary, style = MaterialTheme.typography.titleMedium)
+                Text("IPTV · in focus", color = TextMuted, style = MaterialTheme.typography.labelSmall)
             }
         }
     }
@@ -169,7 +181,13 @@ private fun RailItem(item: NavItem, selected: Boolean, expanded: Boolean, onClic
     }
 }
 
-/** Underlined segmented tabs (used in details, search). */
+/**
+ * Animated underline tabs.
+ *
+ * Each tab measures its own width and absolute x-position (in dp) and reports
+ * back to a shared map. The teal underline animates its `offset` and `width`
+ * with a spring whenever the selected tab changes.
+ */
 @Composable
 fun SegmentedTabs(
     items: List<String>,
@@ -178,41 +196,87 @@ fun SegmentedTabs(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp),
 ) {
-    Row(
+    val density = LocalDensity.current
+    // measured x-offset and width in dp for each tab key
+    val offsets = remember(items) { mutableStateMapOf<String, androidx.compose.ui.unit.Dp>() }
+    val widths = remember(items) { mutableStateMapOf<String, androidx.compose.ui.unit.Dp>() }
+
+    val targetOffset by animateDpAsState(
+        targetValue = offsets[selected] ?: 0.dp,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMedium,
+        ),
+        label = "tab-offset",
+    )
+    val targetWidth by animateDpAsState(
+        targetValue = widths[selected] ?: 0.dp,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioNoBouncy,
+            stiffness = Spring.StiffnessMedium,
+        ),
+        label = "tab-width",
+    )
+
+    Box(
         modifier = modifier
             .fillMaxWidth()
             .background(Bg800)
             .padding(contentPadding),
-        verticalAlignment = Alignment.CenterVertically,
     ) {
-        items.forEach { label ->
-            val isSelected = label == selected
-            val src = remember { MutableInteractionSource() }
-            val focused by src.collectIsFocusedAsState()
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(end = 16.dp)
-                    .clickable(interactionSource = src, indication = null) { onSelected(label) }
-                    .padding(vertical = 10.dp),
-            ) {
-                Text(
-                    label,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = when {
-                        isSelected -> Teal400
-                        focused -> TextPrimary
-                        else -> TextMuted
-                    },
-                )
-                Spacer(Modifier.height(6.dp))
-                Box(
+        // Track layer (the moving underline) — drawn under the tabs row.
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .offset(x = targetOffset)
+                .width(targetWidth)
+                .height(2.dp)
+                .background(Teal400, RoundedCornerShape(2.dp)),
+        )
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            items.forEachIndexed { index, label ->
+                val isSelected = label == selected
+                val src = remember { MutableInteractionSource() }
+                val focused by src.collectIsFocusedAsState()
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .height(2.dp)
-                        .width(if (isSelected) 28.dp else 0.dp)
-                        .background(Teal400, RoundedCornerShape(2.dp)),
-                )
+                        .padding(end = 16.dp)
+                        .clickable(interactionSource = src, indication = null) { onSelected(label) }
+                        .padding(vertical = 10.dp)
+                        .onSizeAndOffsetChanged(
+                            onChanged = { x, w ->
+                                offsets[label] = with(density) { x.toDp() }
+                                widths[label] = with(density) { w.toDp() }
+                            },
+                        ),
+                ) {
+                    Text(
+                        label,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = when {
+                            isSelected -> Teal400
+                            focused -> TextPrimary
+                            else -> TextMuted
+                        },
+                    )
+                    Spacer(Modifier.height(8.dp))
+                }
             }
         }
     }
+}
+
+/**
+ * Reports back the (x, width) of a layout in pixels relative to its parent.
+ * Used by [SegmentedTabs] to animate a single shared underline.
+ */
+private fun Modifier.onSizeAndOffsetChanged(
+    onChanged: (xPx: Float, widthPx: Float) -> Unit,
+): Modifier = this.onGloballyPositioned { coords ->
+    val parent = coords.parentLayoutCoordinates ?: return@onGloballyPositioned
+    val rel = parent.localPositionOf(coords, androidx.compose.ui.geometry.Offset.Zero)
+    onChanged(rel.x, coords.size.width.toFloat())
 }

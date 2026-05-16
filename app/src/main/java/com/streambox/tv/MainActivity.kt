@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import com.streambox.tv.nav.AdaptiveAppShell
+import com.streambox.tv.ui.theme.AuraTheme
 import com.streambox.tv.ui.theme.LocalIsTv
-import com.streambox.tv.ui.theme.StreamBoxTheme
 import com.streambox.tv.ui.theme.isAndroidTv
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val isTv = isAndroidTv(this)
-            StreamBoxTheme {
+            AuraTheme {
                 CompositionLocalProvider(LocalIsTv provides isTv) {
                     val windowSize = calculateWindowSizeClass(this)
                     Surface(modifier = Modifier.fillMaxSize()) {

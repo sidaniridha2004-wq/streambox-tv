@@ -43,9 +43,9 @@ fun SplashScreen(onContinue: () -> Unit) {
                     .background(Brush.linearGradient(listOf(Teal500, Teal400)), RoundedCornerShape(28.dp)),
             )
             Spacer(Modifier.height(20.dp))
-            Text("StreamBox TV", color = TextPrimary, style = MaterialTheme.typography.displaySmall)
+            Text("AuraTV", color = TextPrimary, style = MaterialTheme.typography.displaySmall)
             Spacer(Modifier.height(6.dp))
-            Text("Your IPTV, beautifully organized.", color = TextMuted, style = MaterialTheme.typography.bodyMedium)
+            Text("IPTV, in focus.", color = TextMuted, style = MaterialTheme.typography.bodyMedium)
         }
     }
 }
