@@ -112,9 +112,9 @@ fun SkeletonBlock(
 fun SectionHeader(
     title: String,
     actionText: String? = null,
-    onAction: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 8.dp),
+    onAction: (() -> Unit)? = null,
 ) {
     Row(
         modifier = modifier.fillMaxWidth().padding(contentPadding),
