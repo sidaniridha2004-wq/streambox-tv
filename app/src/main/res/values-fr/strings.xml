@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aura TV</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_live_tv">TV</string>
+    <string name="nav_movies">Films</string>
+    <string name="nav_series">Séries TV</string>
+    <string name="nav_sports">Sports</string>
+
+    <!-- Home Screen -->
+    <string name="filter_all">Toutes les sections</string>
+    <string name="filter_vod">V.O.D</string>
+    <string name="filter_series">Séries</string>
+    <string name="filter_live_tv">TV en direct</string>
+    <string name="recently_added_series">Séries TV récemment ajoutées (%1$d)</string>
+    <string name="recently_added_live_tv">TV en direct récemment ajoutée</string>
+    <string name="trending_now">Tendances</string>
+    <string name="see_all">Voir tout</string>
+    <string name="error">Erreur</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_sync">Synchronisation et données</string>
+    <string name="settings_device_id">Code de gestion</string>
+    <string name="settings_device_id_subtitle">Device ID</string>
+    <string name="settings_manage_playlists">Gérer les listes de lecture</string>
+    <string name="settings_recordings">Enregistrements, rappels et téléchargements</string>
+    <string name="settings_trakt">Trakt Integration</string>
+    <string name="settings_config">Configurations</string>
+    <string name="settings_config_subtitle">Thème, langue</string>
+    <string name="settings_support">Support et commentaires</string>
+    <string name="settings_guide">Guide pas à pas</string>
+    <string name="settings_about">À propos</string>
+    <string name="settings_privacy">Politique de confidentialité</string>
+    <string name="settings_terms">Conditions générales</string>
+    <string name="settings_free_version">Version gratuite</string>
+    <string name="settings_activate_premium">Activer Premium</string>
+    <string name="settings_premium_soon">Premium sera bientôt disponible</string>
+    <string name="settings_sync_started">Synchronisation lancée…</string>
+    <string name="settings_no_active_playlist">Aucune playlist active</string>
+    <string name="settings_no_recordings">Aucun enregistrement disponible</string>
+    <string name="settings_trakt_soon">Trakt sera bientôt disponible</string>
+    <string name="settings_your_device_id">Votre identifiant d\'appareil :</string>
+    <string name="settings_id_copied">ID copié !</string>
+    <string name="copy">Copier</string>
+    <string name="close">Fermer</string>
+    <string name="settings_dark_mode">Mode sombre</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_need_help">Besoin d\'aide ? Contactez-nous :</string>
+    <string name="settings_response_time">Nous répondrons dans les 24 heures.</string>
+    <string name="settings_quick_guide">Guide rapide</string>
+    <string name="settings_guide_step1">1. Ajoutez une playlist (M3U, Xtream ou Stalker)</string>
+    <string name="settings_guide_step2">2. Naviguez entre les onglets : Accueil, TV, Films, Séries</string>
+    <string name="settings_guide_step3">3. Utilisez la Recherche pour trouver une chaîne rapidement</string>
+    <string name="settings_guide_step4">4. Appui long sur une chaîne pour l\'ajouter aux Favoris</string>
+    <string name="settings_guide_step5">5. Dans le lecteur : glissez pour contrôler le volume et la luminosité</string>
+    <string name="got_it">Compris !</string>
+    <string name="settings_about_desc">Lecteur IPTV premium avec support M3U, Xtream Codes et Stalker.</string>
+    <string name="settings_copyright">© 2024 Aura TV. Tous droits réservés.</string>
+    <string name="settings_privacy_text">Aura TV respecte votre vie privée. Nous ne collectons aucune donnée personnelle. Les playlists sont stockées localement sur votre appareil. Aucune information n\'est partagée avec des tiers. L\'application utilise une connexion Internet uniquement pour diffuser le contenu que vous ajoutez.</string>
+    <string name="settings_terms_text">En utilisant Aura TV, vous acceptez de ne pas utiliser cette application à des fins illégales. L\'utilisateur est seul responsable du contenu qu\'il ajoute. Aura TV n\'est pas responsable des flux tiers. L\'application est fournie en l\'état, sans garantie.</string>
+
+    <!-- Add Playlist Screen -->
+    <string name="finish">Terminer</string>
+    <string name="edit_playlist">Modifier la playlist</string>
+    <string name="choose_type">Choisir le type</string>
+    <string name="add_playlist">Ajouter une playlist</string>
+    <string name="back">Retour</string>
+    <string name="save">Enregistrer</string>
+    <string name="next">Suivant</string>
+    <string name="choose_playlist_type">Choisissez le type de playlist :</string>
+    <string name="type_m3u">M3U &amp; EPG</string>
+    <string name="type_m3u_local">Fichier M3U local</string>
+    <string name="type_stalker">Stalker Portal (MAC)</string>
+    <string name="playlist_name_hint">Assurez-vous que le pseudo ne contient aucun caractère spécial…</string>
+    <string name="playlist_name_label">Pseudo</string>
+    <string name="no_file_selected">Aucun fichier sélectionné</string>
+    <string name="m3u_file_label">Fichier M3U</string>
+    <string name="choose_file">Choisir</string>
+    <string name="m3u_link_label">Lien M3U</string>
+    <string name="epg_link_label">Lien EPG (Optionnel)</string>
+    <string name="portal_url_label">URL du portail</string>
+    <string name="mac_address_label">Adresse MAC</string>
+
+    <!-- Activation Screen -->
+    <string name="activation_required">Activation requise</string>
+    <string name="activation_enter_code">Veuillez entrer votre code pour continuer</string>
+    <string name="activation_code_hint">Code d\'activation</string>
+    <string name="activation_invalid_code">Code d\'activation invalide</string>
+    <string name="activate_now">ACTIVER MAINTENANT</string>
+    <string name="device_id_label">Device ID</string>
+
+    <!-- Playlist Details Screen -->
+    <string name="search_channels">Rechercher des chaînes…</string>
+    <string name="live_tv_title">TV en direct</string>
+    <string name="all_channels">Toutes les chaînes</string>
+    <string name="filter_all_short">Tout</string>
+    <string name="filter_favorites">★ Favoris</string>
+    <string name="filter_world_cup">⚽ Coupe du monde</string>
+    <string name="no_favorites_yet">Aucun favori pour le moment</string>
+    <string name="no_world_cup_channels">Aucune chaîne Coupe du monde trouvée</string>
+    <string name="no_channels_found">Aucune chaîne trouvée</string>
+
+    <!-- Playlist Selection Screen -->
+    <string name="welcome_title">Bienvenue sur Aura TV</string>
+    <string name="add_playlist_btn">Ajouter une playlist</string>
+    <string name="before_using_app">Avant d\'utiliser l\'application, vous devez ajouter une playlist</string>
+    <string name="or_separator">Ou</string>
+    <string name="login_manage_device">Connectez-vous à votre compte et gérez votre appareil en ligne ou utilisez notre fonction de synchronisation</string>
+    <string name="login_btn">Connexion</string>
+    <string name="edit">Modifier</string>
+    <string name="no_playlists_found">Aucune playlist trouvée. Pour utiliser Aura TV, vous devez ajouter une playlist.</string>
+
+    <!-- Category Screen -->
+    <string name="all">Tout</string>
+    <string name="favorites">Favoris</string>
+    <string name="search_hint">Rechercher…</string>
+    <string name="no_content_found">Aucun %1$s trouvé dans cette playlist</string>
+    <string name="continue_watching">Reprendre</string>
+    <string name="loading_series">Chargement des séries…</string>
+    <string name="all_series">Toutes les séries</string>
+    <string name="all_content">Tous les %1$s</string>
+
+    <!-- Video Player -->
+    <string name="reconnecting">Reconnexion… (tentative %1$d)</string>
+    <string name="buffering">Mise en mémoire tampon…</string>
+    <string name="removed_from_list">Retiré de Ma Liste</string>
+    <string name="added_to_list">Ajouté à Ma Liste</string>
+    <string name="cannot_favorite">Impossible de mettre en favori ce flux</string>
+    <string name="aspect_fit">Ajuster</string>
+    <string name="aspect_fill">Remplir</string>
+    <string name="aspect_zoom">Zoom</string>
+    <string name="aspect_ratio_label">Format : %1$s</string>
+    <string name="channels">Chaînes</string>
+    <string name="playback_speed">Vitesse de lecture</string>
+    <string name="cancel">Annuler</string>
+
+    <!-- Remote Config / Syncing -->
+    <string name="checking_updates">Vérification des mises à jour…</string>
+    <string name="downloading_tv">Téléchargement des chaînes TV…</string>
+    <string name="downloading_movies">Téléchargement des Films et Séries…</string>
+    <string name="tv_synced">Chaînes TV synchronisées !</string>
+    <string name="movies_synced">Films et Séries synchronisés !</string>
+    <string name="finalizing">Finalisation…</string>
+    <string name="ready">Prêt !</string>
+    <string name="offline_mode">Mode hors ligne</string>
+    <string name="all_done">Terminé !</string>
+    <string name="loading">Chargement…</string>
+    <string name="setting_up_content">Configuration de votre contenu, veuillez patienter…</string>
+    <string name="sync_error">Erreur de synchronisation : %1$s</string>
+
+    <!-- Language Selection Screen -->
+    <string name="choose_language">Choisissez votre langue</string>
+    <string name="language_english">English</string>
+    <string name="language_french">Français</string>
+    <string name="language_arabic">العربية</string>
+    <string name="continue_btn">Continuer</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_welcome_title">Bienvenue sur Aura TV</string>
+    <string name="onboarding_welcome_desc">Votre expérience de streaming premium commence ici. Profitez de milliers de chaînes, films et séries.</string>
+    <string name="onboarding_live_title">Regardez la TV en direct</string>
+    <string name="onboarding_live_desc">Parcourez des milliers de chaînes TV en direct organisées par catégorie. Trouvez vos favoris instantanément grâce à la recherche.</string>
+    <string name="onboarding_movies_title">Films et Séries</string>
+    <string name="onboarding_movies_desc">Explorez une vaste bibliothèque de films et séries TV. Streamez à la demande, quand vous voulez.</string>
+    <string name="onboarding_playlist_title">Votre contenu, à votre façon</string>
+    <string name="onboarding_playlist_desc">Ajoutez vos propres playlists via lien M3U, Xtream Codes ou Stalker Portal. Flexibilité totale.</string>
+    <string name="onboarding_ready_title">Vous êtes prêt !</string>
+    <string name="onboarding_ready_desc">Commencez à regarder maintenant. Profitez de la meilleure expérience IPTV avec Aura TV.</string>
+    <string name="skip">Passer</string>
+    <string name="start_watching">Commencer à regarder</string>
+    <string name="delete">Supprimer</string>
+    <string name="delete_playlist_confirm">Êtes-vous sûr de vouloir supprimer cette playlist ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+</resources>

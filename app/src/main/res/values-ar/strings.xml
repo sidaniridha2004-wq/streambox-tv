@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aura TV</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_live_tv">البث المباشر</string>
+    <string name="nav_movies">أفلام</string>
+    <string name="nav_series">مسلسلات</string>
+    <string name="nav_sports">رياضة</string>
+
+    <!-- Home Screen -->
+    <string name="filter_all">جميع الأقسام</string>
+    <string name="filter_vod">فيديو حسب الطلب</string>
+    <string name="filter_series">مسلسلات</string>
+    <string name="filter_live_tv">البث المباشر</string>
+    <string name="recently_added_series">مسلسلات مضافة حديثاً (%1$d)</string>
+    <string name="recently_added_live_tv">بث مباشر مضاف حديثاً</string>
+    <string name="trending_now">الأكثر رواجاً</string>
+    <string name="see_all">عرض الكل</string>
+    <string name="error">خطأ</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_sync">المزامنة والبيانات</string>
+    <string name="settings_device_id">رمز الإدارة</string>
+    <string name="settings_device_id_subtitle">معرّف الجهاز</string>
+    <string name="settings_manage_playlists">إدارة قوائم التشغيل</string>
+    <string name="settings_recordings">التسجيلات والتذكيرات والتنزيلات</string>
+    <string name="settings_trakt">تكامل Trakt</string>
+    <string name="settings_config">الإعدادات</string>
+    <string name="settings_config_subtitle">المظهر، اللغة</string>
+    <string name="settings_support">الدعم والملاحظات</string>
+    <string name="settings_guide">دليل خطوة بخطوة</string>
+    <string name="settings_about">حول التطبيق</string>
+    <string name="settings_privacy">سياسة الخصوصية</string>
+    <string name="settings_terms">الشروط والأحكام</string>
+    <string name="settings_free_version">نسخة مجانية</string>
+    <string name="settings_activate_premium">تفعيل بريميوم</string>
+    <string name="settings_premium_soon">ستتوفر النسخة المميزة قريباً</string>
+    <string name="settings_sync_started">بدأت المزامنة…</string>
+    <string name="settings_no_active_playlist">لا توجد قائمة تشغيل نشطة</string>
+    <string name="settings_no_recordings">لا توجد تسجيلات متاحة</string>
+    <string name="settings_trakt_soon">سيتوفر Trakt قريباً</string>
+    <string name="settings_your_device_id">معرّف جهازك:</string>
+    <string name="settings_id_copied">تم نسخ المعرّف!</string>
+    <string name="copy">نسخ</string>
+    <string name="close">إغلاق</string>
+    <string name="settings_dark_mode">الوضع الداكن</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_need_help">هل تحتاج مساعدة؟ تواصل معنا:</string>
+    <string name="settings_response_time">سنرد خلال 24 ساعة.</string>
+    <string name="settings_quick_guide">دليل سريع</string>
+    <string name="settings_guide_step1">1. أضف قائمة تشغيل (M3U أو Xtream أو Stalker)</string>
+    <string name="settings_guide_step2">2. تنقّل بين التبويبات: الرئيسية، البث، الأفلام، المسلسلات</string>
+    <string name="settings_guide_step3">3. استخدم البحث للعثور على قناة بسرعة</string>
+    <string name="settings_guide_step4">4. اضغط مطوّلاً على قناة لإضافتها إلى المفضلة</string>
+    <string name="settings_guide_step5">5. في المشغّل: اسحب للتحكم في مستوى الصوت والسطوع</string>
+    <string name="got_it">فهمت!</string>
+    <string name="settings_about_desc">مشغّل IPTV متميز يدعم M3U وXtream Codes وStalker.</string>
+    <string name="settings_copyright">© 2024 Aura TV. جميع الحقوق محفوظة.</string>
+    <string name="settings_privacy_text">يحترم Aura TV خصوصيتك. لا نجمع أي بيانات شخصية. يتم تخزين قوائم التشغيل محلياً على جهازك. لا تتم مشاركة أي معلومات مع أطراف ثالثة. يستخدم التطبيق اتصال الإنترنت فقط لبث المحتوى الذي تضيفه.</string>
+    <string name="settings_terms_text">باستخدام Aura TV، توافق على عدم استخدام هذا التطبيق لأغراض غير قانونية. المستخدم هو المسؤول الوحيد عن المحتوى الذي يضيفه. Aura TV غير مسؤول عن البث من أطراف ثالثة. يتم تقديم التطبيق كما هو بدون ضمان.</string>
+
+    <!-- Add Playlist Screen -->
+    <string name="finish">إنهاء</string>
+    <string name="edit_playlist">تعديل قائمة التشغيل</string>
+    <string name="choose_type">اختر النوع</string>
+    <string name="add_playlist">إضافة قائمة تشغيل</string>
+    <string name="back">رجوع</string>
+    <string name="save">حفظ</string>
+    <string name="next">التالي</string>
+    <string name="choose_playlist_type">اختر نوع قائمة التشغيل:</string>
+    <string name="type_m3u">M3U &amp; EPG</string>
+    <string name="type_m3u_local">ملف M3U محلي</string>
+    <string name="type_stalker">Stalker Portal (MAC)</string>
+    <string name="playlist_name_hint">تأكد أن الاسم لا يحتوي على أحرف خاصة…</string>
+    <string name="playlist_name_label">الاسم</string>
+    <string name="no_file_selected">لم يتم اختيار ملف</string>
+    <string name="m3u_file_label">ملف M3U</string>
+    <string name="choose_file">اختيار</string>
+    <string name="m3u_link_label">رابط M3U</string>
+    <string name="epg_link_label">رابط EPG (اختياري)</string>
+    <string name="portal_url_label">رابط البوابة</string>
+    <string name="mac_address_label">عنوان MAC</string>
+
+    <!-- Activation Screen -->
+    <string name="activation_required">التفعيل مطلوب</string>
+    <string name="activation_enter_code">الرجاء إدخال رمز التفعيل للمتابعة</string>
+    <string name="activation_code_hint">رمز التفعيل</string>
+    <string name="activation_invalid_code">رمز التفعيل غير صالح</string>
+    <string name="activate_now">تفعيل الآن</string>
+    <string name="device_id_label">معرّف الجهاز</string>
+
+    <!-- Playlist Details Screen -->
+    <string name="search_channels">بحث عن القنوات…</string>
+    <string name="live_tv_title">البث المباشر</string>
+    <string name="all_channels">جميع القنوات</string>
+    <string name="filter_all_short">الكل</string>
+    <string name="filter_favorites">★ المفضلة</string>
+    <string name="filter_world_cup">⚽ كأس العالم</string>
+    <string name="no_favorites_yet">لا توجد مفضلات بعد</string>
+    <string name="no_world_cup_channels">لم يتم العثور على قنوات كأس العالم</string>
+    <string name="no_channels_found">لم يتم العثور على قنوات</string>
+
+    <!-- Playlist Selection Screen -->
+    <string name="welcome_title">مرحباً بك في Aura TV</string>
+    <string name="add_playlist_btn">إضافة قائمة تشغيل</string>
+    <string name="before_using_app">قبل استخدام التطبيق، يجب إضافة قائمة تشغيل</string>
+    <string name="or_separator">أو</string>
+    <string name="login_manage_device">سجّل الدخول إلى حسابك وأدر جهازك عبر الإنترنت أو استخدم ميزة المزامنة</string>
+    <string name="login_btn">تسجيل الدخول</string>
+    <string name="edit">تعديل</string>
+    <string name="no_playlists_found">لم يتم العثور على قوائم تشغيل. لاستخدام Aura TV، يجب إضافة قائمة تشغيل.</string>
+
+    <!-- Category Screen -->
+    <string name="all">الكل</string>
+    <string name="favorites">المفضلة</string>
+    <string name="search_hint">بحث…</string>
+    <string name="no_content_found">لم يتم العثور على %1$s في هذه القائمة</string>
+    <string name="continue_watching">متابعة المشاهدة</string>
+    <string name="loading_series">جاري تحميل المسلسلات…</string>
+    <string name="all_series">جميع المسلسلات</string>
+    <string name="all_content">جميع %1$s</string>
+
+    <!-- Video Player -->
+    <string name="reconnecting">إعادة الاتصال… (المحاولة %1$d)</string>
+    <string name="buffering">جاري التحميل…</string>
+    <string name="removed_from_list">تمت الإزالة من قائمتي</string>
+    <string name="added_to_list">تمت الإضافة إلى قائمتي</string>
+    <string name="cannot_favorite">لا يمكن إضافة هذا البث إلى المفضلة</string>
+    <string name="aspect_fit">ملاءمة</string>
+    <string name="aspect_fill">ملء</string>
+    <string name="aspect_zoom">تكبير</string>
+    <string name="aspect_ratio_label">نسبة العرض: %1$s</string>
+    <string name="channels">القنوات</string>
+    <string name="playback_speed">سرعة التشغيل</string>
+    <string name="cancel">إلغاء</string>
+
+    <!-- Remote Config / Syncing -->
+    <string name="checking_updates">جاري التحقق من التحديثات…</string>
+    <string name="downloading_tv">جاري تنزيل القنوات التلفزيونية…</string>
+    <string name="downloading_movies">جاري تنزيل الأفلام والمسلسلات…</string>
+    <string name="tv_synced">تمت مزامنة القنوات!</string>
+    <string name="movies_synced">تمت مزامنة الأفلام والمسلسلات!</string>
+    <string name="finalizing">جاري الإنهاء…</string>
+    <string name="ready">جاهز!</string>
+    <string name="offline_mode">وضع عدم الاتصال</string>
+    <string name="all_done">تم!</string>
+    <string name="loading">جاري التحميل…</string>
+    <string name="setting_up_content">جاري إعداد المحتوى، يرجى الانتظار…</string>
+    <string name="sync_error">خطأ في المزامنة: %1$s</string>
+
+    <!-- Language Selection Screen -->
+    <string name="choose_language">اختر لغتك</string>
+    <string name="language_english">English</string>
+    <string name="language_french">Français</string>
+    <string name="language_arabic">العربية</string>
+    <string name="continue_btn">متابعة</string>
+
+    <!-- Onboarding Screen -->
+    <string name="onboarding_welcome_title">مرحباً بك في Aura TV</string>
+    <string name="onboarding_welcome_desc">تجربة البث المتميزة تبدأ هنا. استمتع بآلاف القنوات والأفلام والمسلسلات.</string>
+    <string name="onboarding_live_title">شاهد البث المباشر</string>
+    <string name="onboarding_live_desc">تصفح آلاف القنوات التلفزيونية المباشرة المنظمة حسب الفئة. اعثر على المفضلة فوراً بالبحث.</string>
+    <string name="onboarding_movies_title">أفلام ومسلسلات</string>
+    <string name="onboarding_movies_desc">استكشف مكتبة واسعة من الأفلام والمسلسلات. شاهد حسب الطلب في أي وقت.</string>
+    <string name="onboarding_playlist_title">المحتوى الخاص بك، بطريقتك</string>
+    <string name="onboarding_playlist_desc">أضف قوائم التشغيل عبر رابط M3U أو Xtream Codes أو Stalker Portal. مرونة كاملة.</string>
+    <string name="onboarding_ready_title">أنت جاهز!</string>
+    <string name="onboarding_ready_desc">ابدأ المشاهدة الآن. استمتع بأفضل تجربة IPTV مع Aura TV.</string>
+    <string name="skip">تخطي</string>
+    <string name="start_watching">ابدأ المشاهدة</string>
+    <string name="delete">حذف</string>
+    <string name="delete_playlist_confirm">هل أنت متأكد أنك تريد حذف قائمة التشغيل هذه؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+</resources>
