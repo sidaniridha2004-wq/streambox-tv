@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "NITRO_PRESET=vercel bun run build",
+  "installCommand": "bun install",
+  "framework": null,
+  "outputDirectory": ".vercel/output",
+  "build": {
+    "env": {
+      "NITRO_PRESET": "vercel",
+      "VITE_SUPABASE_URL": "https://apnpcwzdilbedlwrcpdi.supabase.co",
+      "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_jQaXydNFgB_6j_KrZWwC2w_zM5O_Ig3",
+      "VITE_SUPABASE_PROJECT_ID": "apnpcwzdilbedlwrcpdi",
+      "SUPABASE_URL": "https://apnpcwzdilbedlwrcpdi.supabase.co",
+      "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_jQaXydNFgB_6j_KrZWwC2w_zM5O_Ig3",
+      "SUPABASE_PROJECT_ID": "apnpcwzdilbedlwrcpdi",
+      "ADMIN_PASSWORD": "AuraTV@2026!"
+    }
+  },
+  "env": {
+    "VITE_SUPABASE_URL": "https://apnpcwzdilbedlwrcpdi.supabase.co",
+    "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_jQaXydNFgB_6j_KrZWwC2w_zM5O_Ig3",
+    "VITE_SUPABASE_PROJECT_ID": "apnpcwzdilbedlwrcpdi",
+    "SUPABASE_URL": "https://apnpcwzdilbedlwrcpdi.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_jQaXydNFgB_6j_KrZWwC2w_zM5O_Ig3",
+    "SUPABASE_PROJECT_ID": "apnpcwzdilbedlwrcpdi",
+    "ADMIN_PASSWORD": "AuraTV@2026!"
+  }
+}
